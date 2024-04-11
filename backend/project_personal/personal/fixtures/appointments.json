@@ -1,0 +1,93 @@
+[
+  {
+    "model": "personal.Appointment",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 1,
+      "patient": 1,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 2,
+    "fields": {
+      "id": 2,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 1,
+      "patient": 2,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 3,
+    "fields": {
+      "id": 3,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 1,
+      "patient": 3,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 4,
+    "fields": {
+      "id": 4,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 1,
+      "patient": 4,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 5,
+    "fields": {
+      "id": 5,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 1,
+      "patient": 5,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 6,
+    "fields": {
+      "id": 6,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 2,
+      "patient": 6,
+      "status": "2"
+    }
+  },
+  {
+    "model": "personal.Appointment",
+    "pk": 7,
+    "fields": {
+      "id": 7,
+      "datetime": "2024-04-09T16:53:42Z",
+      "is_online": true,
+      "address": "Rua Boturoca 220",
+      "professional": 2,
+      "patient": 7,
+      "status": "2"
+    }
+  }
+]

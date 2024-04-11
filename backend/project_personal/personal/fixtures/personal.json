@@ -1,0 +1,36 @@
+[
+  {
+    "model": "personal.Personal",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "name": "Lucas Garieri",
+      "date_of_birth": "2001-07-05",
+      "phone_number": "61982653119",
+      "is_online": true,
+      "email": "lucas@admin.com",
+      "document": "12345678910",
+      "price": "100.00",
+      "address": "1",
+      "summary": "1",
+      "patients": []
+    }
+  },
+  {
+    "model": "personal.Personal",
+    "pk": 2,
+    "fields": {
+      "id": 2,
+      "name": "Lucas Garieri",
+      "date_of_birth": "2001-07-05",
+      "phone_number": "61982653119",
+      "is_online": true,
+      "email": "soph@admin.com",
+      "document": "12345678911",
+      "price": "100.00",
+      "address": "1",
+      "summary": "1",
+      "patients": []
+    }
+  }
+]
