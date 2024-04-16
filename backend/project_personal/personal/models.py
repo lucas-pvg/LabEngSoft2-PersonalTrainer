@@ -1,9 +1,9 @@
 from django.db import models
 
 APP_OPTIONS = (
-    ('0', 'CANCELED'),
-    ('1', 'PENDING'),
-    ('2', 'CONFIRMED'),
+    ('Cancelado', 'Cancelado'),
+    ('Pendente', 'Pendente'),
+    ('Confirmado', 'Confirmado'),
 )
 
 # Create your models here.    
@@ -35,6 +35,8 @@ class Personal(models.Model):
 class Appointment(models.Model):
     professional = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="appointments")
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
+    patient_name = models.CharField(max_length=120, null=False, blank=False)
+    professional_name = models.CharField(max_length=120, null=False, blank=False)
     datetime = models.DateTimeField(null=False, blank=False)
     is_online = models.BooleanField(null=False, blank=False)
     address = models.CharField(max_length=255, null=True, blank=True)

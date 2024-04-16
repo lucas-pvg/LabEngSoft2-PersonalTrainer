@@ -8,8 +8,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 1,
+      "professional_name": "Lucas Garieri",
       "patient": 1,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -21,8 +23,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 1,
+      "professional_name": "Lucas Garieri",
       "patient": 2,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -34,8 +38,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 1,
+      "professional_name": "Lucas Garieri",
       "patient": 3,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -47,8 +53,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 1,
+      "professional_name": "Lucas Garieri",
       "patient": 4,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -60,8 +68,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 1,
+      "professional_name": "Lucas Garieri",
       "patient": 5,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -73,8 +83,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 2,
+      "professional_name": "Lucas Garieri",
       "patient": 6,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   },
   {
@@ -86,8 +98,10 @@
       "is_online": true,
       "address": "Rua Boturoca 220",
       "professional": 2,
+      "professional_name": "Lucas Garieri",
       "patient": 7,
-      "status": "2"
+      "patient_name": "Lucas Garieri",
+      "status": "Confirmado"
     }
   }
 ]

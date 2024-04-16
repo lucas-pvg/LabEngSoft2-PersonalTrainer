@@ -57,8 +57,11 @@ class PatientView(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
-    def list_from_personal(self, request):
-        patient_list = request.data['patient_list']
+    def list_from_personal(self, request, prof):
+        queryset = Appointment.objects.filter(professional=prof)
+        serializer = AppointmentSerializer(queryset, many=True)
+        
+        patient_list = [x['patient'] for x in serializer.data]
         queryset = Patient.objects.filter(pk__in=patient_list)
         serializer = PatientSerializer(queryset, many=True)
 

@@ -12,5 +12,5 @@ urlpatterns = [
     path('patient/list/', views.PatientView.as_view({'get': 'list_all'})),
     path('patient/create/', views.PatientView.as_view({'post': 'create'})),
     path('patient/<int:pk>/', views.PatientView.as_view({'get': 'retrieve'})),
-    path('patient/list-group/', views.PatientView.as_view({'post': 'list_from_personal'})),
+    path('patient/list/<int:prof>/', views.PatientView.as_view({'get': 'list_from_personal'})),
 ]
