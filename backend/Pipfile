@@ -6,6 +6,14 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+asgiref = "*"
+Django = "*"
+django-cors-headers = "*"
+django-cpf = "*"
+djangorestframework = "*"
+sqlparse = "*"
+typing_extensions = "*"
+tzdata = "*"
 
 [dev-packages]
 
