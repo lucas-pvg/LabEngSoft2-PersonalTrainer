@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'project_personal.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "personal_trainer_service_db"),
+        "NAME": os.getenv("DB_NAME", "postgres"),
         "USER": os.getenv("DB_USER", "postgres"),
         "PASSWORD": os.getenv("DB_PASSWORD", "postgres"),
         "HOST": os.getenv("DB_HOST", "personal-trainer-service-db.cpssys6guvh3.sa-east-1.rds.amazonaws.com"),
