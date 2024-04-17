@@ -13,6 +13,7 @@ sqlparse = "*"
 typing_extensions = "*"
 tzdata = "*"
 python-dotenv = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
