@@ -7,6 +7,18 @@ class PersonalSerializer(serializers.ModelSerializer):
         model = Personal
         fields ="__all__"
         
+        
+class NutritionistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Nutritionist
+        fields = '__all__'
+        
+
+class DoctorSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Doctor 
+        fields = '__all__'
+        
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:

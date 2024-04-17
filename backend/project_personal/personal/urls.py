@@ -6,6 +6,16 @@ urlpatterns = [
     path('personal/list/', views.PersonalView.as_view({'get': 'list_all'})),
     path('personal/create/', views.PersonalView.as_view({'post': 'create'})),
     path('personal/<int:pk>/', views.PersonalView.as_view({'get': 'retrieve'})),
+    # path nutritionist
+    path("nutritionist/list/", views.NutritionistView.as_view(actions={"get": "list_all"})),
+    path("nutritionist/create/", views.NutritionistView.as_view(actions={"post": "create"})),
+    path("nutritionist/<int:pk>/", views.NutritionistView.as_view(actions={"get": "retrieve"})),
+    # path doctor
+    path("Doctor/", views.DoctorView.as_view(actions={"post": "create", "get": "list_all"})),
+    path("Doctor/<int:pk>/", views.DoctorView.as_view(actions={"get": "retrieve"})),
+    path("Doctor_from_id/<int:id_user>/", 
+        views.DoctorView.as_view(actions={"get": "list_from_professional_id"}),
+    ),
     # path appointment
     path('appointment/list/', views.AppointmentView.as_view({'get': 'list_all'})),
     path('appointment/create/', views.AppointmentView.as_view({'post': 'create'})),
@@ -36,4 +46,5 @@ urlpatterns = [
     path("training/create/", views.DietView.as_view(actions={"post": "create"})),
     path("training/<int:pk>/", views.DietView.as_view(actions={"get": "retrieve", "delete": "delete"})),
     path("training_from_patient/<int:pk>/", views.DietView.as_view(actions={"get": "retrieve_by_patient"})),
+    
 ]

@@ -1,12 +1,19 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
+from .permissions import AllowPostOnlyPermission
 
 from .models import *
 from .serializers import *
 
 
-class PersonalView(ViewSet):
+class PersonalView(ModelViewSet):
+    
+    serializer_class = PersonalSerializer
+    queryset = Personal.objects.all()
+    permission_classes = [AllowPostOnlyPermission]
+    
+    
     def create(self, request):
         serializer = PersonalSerializer(data=request.data)
         
@@ -33,6 +40,91 @@ class PersonalView(ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = PersonalSerializer(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class NutritionistView(ModelViewSet):
+    
+    serializer_class = NutritionistSerializer
+    queryset = Nutritionist.objects.all()
+    permission_classes = [AllowPostOnlyPermission]
+
+
+    def create(self, request):
+        serializer = NutritionistSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = Nutritionist.objects.create(**serializer.validated_data)
+        serializer = NutritionistSerializer(queryset)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    
+    def retrieve(self, request, pk):
+        queryset = Nutritionist.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = NutritionistSerializer(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def list_all(self, request):
+        queryset = Nutritionist.objects.all()
+
+        if not queryset:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        serializer = NutritionistSerializer(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class DoctorView(ModelViewSet): 
+    def create(self, request): 
+        serializer = DoctorSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+        doctor = Doctor.objects.create(**serializer.validate_data)
+        doctor_serialized = DoctorSerializer(doctor)
+
+        return Response(doctor_serialized.data, status=status.HTTP_201_CREATED)
+    
+    def retrieve(self, request, pk): 
+        doctor = Doctor.objects.filter(pk=pk).first()
+
+        if not doctor: 
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = DoctorSerializer(doctor)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def list_all(self, request): 
+        doctor_list = Doctor.objects.all()
+
+        if not doctor_list: 
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = DoctorSerializer(doctor_list, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def list_from_professional_id(self, request, id_user):
+        user = request.user
+        if not user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        doctor = Doctor.objects.filter(id_user=id_user)
+        if not doctor:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        serializer = DoctorSerializer(doctor, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -196,13 +288,18 @@ class EvolutionView(ModelViewSet):
     
     
     def update(self, request, pk):
-        serializer = EvolutionSerializers(data=request.data)
-        
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        queryset = Evolution.objects.filter(pk=pk).update(**serializer.validated_data)
-        response_serializer = EvolutionSerializers(queryset)
+        evolution = Evolution.objects.filter(pk=pk).first()
+        evolution.date = request.data.get('date')
+        evolution.weight = request.data.get('weight')
+        evolution.imc = request.data.get('imc')
+        evolution.activity = request.data.get('activity')
+        evolution.appetite = request.data.get('appetite')
+        evolution.chewing = request.data.get('chewing')
+        evolution.intestine = request.data.get('intestine')
+        evolution.sleep = request.data.get('sleep')
+        evolution.comments = request.data.get('comments')
+        evolution.save()
+        response_serializer = EvolutionSerializers(evolution)
         
         return Response(response_serializer.data, status=status.HTTP_200_OK)
 

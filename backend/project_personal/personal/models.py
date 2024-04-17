@@ -33,6 +33,54 @@ class Personal(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, null=False, blank=False)
     is_online = models.BooleanField(default=1, null=False, blank=False)
     bio = models.CharField(max_length=255, null=False, blank=False, default="")
+    
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " - Professional: " + str(self.id)
+
+    class Meta: 
+        db_table = "personal"
+    
+    
+class Nutritionist(models.Model):
+    id_user = models.PositiveIntegerField(unique=True)
+    first_name = models.CharField(max_length=255, null=False, blank=False)
+    last_name = models.CharField(max_length=255, null=False, blank=False, default="")
+    date_of_birth = models.DateField(blank=False, null=False)
+    email = models.EmailField(max_length=255, blank=False, unique=True, null=False)
+    phone_number = models.CharField(max_length=15, blank=True, default="")
+    address = models.CharField(max_length=255, null=True, blank=True)
+    cpf = CPFField("cpf", default="")
+    service = models.CharField(max_length=255, null=False, blank=False)
+    price = models.FloatField(default=100.0)
+    is_online = models.BooleanField(default=1, null=False, blank=False)
+    bio = models.CharField(max_length=255, null=False, blank=False, default="")
+    
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " - Professional: " + str(self.id)
+
+    class Meta: 
+        db_table = "nutritionist"
+    
+
+class Doctor(models.Model):
+    id_user = models.PositiveIntegerField(unique=True)
+    first_name = models.CharField(max_length=255, null=False, blank=False)
+    last_name = models.CharField(max_length=255, null=False, blank=False, default="")
+    date_of_birth = models.DateField(blank=False, null=False)
+    email = models.EmailField(max_length=255, blank=False, unique=True, null=False)
+    phone_number = models.CharField(max_length=15, blank=True, default="")
+    cpf = CPFField("cpf", default="")
+    service = models.CharField(max_length=255, default="doctor", null=False, blank=False)
+    price = models.FloatField(default=100.0)
+    bio = models.CharField(max_length=255, null=False, blank=False, default="")
+    is_online = models.BooleanField(default=False)
+    address = models.CharField(max_length=255, default="")
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
+    class Meta: 
+        db_table = "doctor"
 
 
 class Appointment(models.Model):
