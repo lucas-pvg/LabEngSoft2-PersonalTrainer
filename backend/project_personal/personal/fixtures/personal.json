@@ -3,34 +3,36 @@
     "model": "personal.Personal",
     "pk": 1,
     "fields": {
-      "id": 1,
-      "name": "Lucas Garieri",
+      "id_user": 1,
+      "first_name": "Lucas",
+      "last_name": "Garieri",
       "date_of_birth": "2001-07-05",
       "phone_number": "61982653119",
+      "cpf": "12345678910",
       "is_online": true,
       "email": "lucas@admin.com",
-      "document": "12345678910",
+      "service": "personal",
       "price": "100.00",
       "address": "1",
-      "summary": "1",
-      "patients": []
+      "bio": "1"
     }
   },
   {
     "model": "personal.Personal",
     "pk": 2,
     "fields": {
-      "id": 2,
-      "name": "Lucas Garieri",
+      "id_user": 2,
+      "first_name": "Lucas",
+      "last_name": "Garieri",
       "date_of_birth": "2001-07-05",
       "phone_number": "61982653119",
+      "cpf": "12345678910",
       "is_online": true,
       "email": "soph@admin.com",
-      "document": "12345678911",
+      "service": "personal",
       "price": "100.00",
       "address": "1",
-      "summary": "1",
-      "patients": []
+      "bio": "1"
     }
   }
 ]

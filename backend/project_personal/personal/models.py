@@ -1,4 +1,5 @@
 from django.db import models
+from cpf_field.models import CPFField
 
 APP_OPTIONS = (
     ('Cancelado', 'Cancelado'),
@@ -20,16 +21,18 @@ class Patient(models.Model):
     
     
 class Personal(models.Model):
-    name = models.CharField(max_length=120, null=False, blank=False)
-    date_of_birth = models.DateField(null=False, blank=False)
+    id_user = models.PositiveIntegerField(unique=True)
+    first_name = models.CharField(max_length=255, null=False, blank=False)
+    last_name = models.CharField(max_length=255, null=False, blank=False, default="")
+    date_of_birth = models.DateField(blank=False, null=False)
+    email = models.EmailField(max_length=255, blank=False, unique=True, null=False)
     phone_number = models.CharField(max_length=15, blank=True, default="")
-    email = models.EmailField(max_length=255, unique=True, blank=False, null=False)
-    document = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    cpf = CPFField("cpf", default="")
     address = models.CharField(max_length=255, null=True, blank=True)
+    service = models.CharField(max_length=255, default="doctor", null=False, blank=False)
     price = models.DecimalField(decimal_places=2, max_digits=10, null=False, blank=False)
     is_online = models.BooleanField(default=1, null=False, blank=False)
-    summary = models.TextField(max_length=500, null=True, blank=True)
-    patients = models.ManyToManyField(Patient, blank=True, null=True)
+    bio = models.CharField(max_length=255, null=False, blank=False, default="")
 
 
 class Appointment(models.Model):
@@ -43,9 +46,48 @@ class Appointment(models.Model):
     status = models.CharField(max_length=20, choices=APP_OPTIONS, null=True, blank=True)
 
 
-class Exercise(models.Model):
-    pass
+class Evaluation(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="evaluation")
+    patientId = models.PositiveIntegerField()
+    name = models.CharField(max_length=255, null=False, blank=False)
+    file = models.FileField(upload_to='evaluation/')
+    
+    def __str__(self):
+        return str(self.patient) + " - File: " + str(self.id) + str(self.name)
 
 
-class Payment(models.Model):
-    pass
+class Evolution(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="evolution")
+    patientId = models.PositiveIntegerField()
+    date = models.DateField(null=False, blank=False)
+    weight = models.PositiveBigIntegerField(max_length=255, null=False, blank=False)
+    imc = models.PositiveIntegerField(max_length=255, null=False, blank=False)
+    activity = models.CharField(max_length=255, null=False, blank=False)
+    appetite = models.CharField(max_length=255, null=False, blank=False)
+    chewing = models.CharField(max_length=255, null=False, blank=False)
+    intestine = models.CharField(max_length=255, null=False, blank=False)
+    sleep = models.CharField(max_length=255, null=False, blank=False)
+    comments = models.CharField(max_length=255, null=False, blank=False)
+    
+    def __str__(self):
+        return str(self.patient) + " - Evolution: " + str(self.id)
+
+
+class Diet(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="diet")
+    patientId = models.PositiveIntegerField()
+    name = models.CharField(max_length=255, null=False, blank=False)
+    file = models.FileField(upload_to='diet/')
+    
+    def __str__(self):
+        return str(self.patient) + " - File: " + str(self.id) + str(self.name)
+
+
+class Training(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="Training")
+    patientId = models.PositiveIntegerField()
+    name = models.CharField(max_length=255, null=False, blank=False)
+    file = models.FileField(upload_to='training/')
+    
+    def __str__(self):
+        return str(self.patient) + " - File: " + str(self.id) + str(self.name)

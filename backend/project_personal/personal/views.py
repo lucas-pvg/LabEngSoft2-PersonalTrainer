@@ -1,9 +1,9 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 
-from .models import Personal, Patient, Appointment
-from .serializers import PersonalSerializer, PatientSerializer, AppointmentSerializer
+from .models import *
+from .serializers import *
 
 
 class PersonalView(ViewSet):
@@ -117,9 +117,252 @@ class AppointmentView(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class ExerciseView(ViewSet):
-    pass
+class EvaluationView(ModelViewSet):
+    
+    serializer_class = EvaluationSerializers
+    queryset = Evaluation.objects.all()
+    
+    
+    def create(self, request):
+        serializer = EvaluationSerializers(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = Evaluation.objects.create(**serializer.validated_data)
+        serializer = EvaluationSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class PaymentView(ViewSet):
-    pass
+    def list_all(self, request):
+        queryset = Evaluation.objects.all()
+        serializer = EvaluationSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def retrieve(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        queryset = Evaluation.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EvaluationSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def retrieve_by_patient(self, request, pk):
+        queryset = Evaluation.objects.filter(patientId=pk)
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EvaluationSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def delete(self, request, pk):
+        queryset = Evaluation.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        queryset.delete()
+        serializer = EvaluationSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class EvolutionView(ModelViewSet):
+    
+    serializer_class = EvolutionSerializers
+    queryset = Evolution.objects.all()
+    
+    
+    def create(self, request):
+        serializer = EvolutionSerializers(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        queryset = Evolution.objects.create(**serializer.validated_data)
+        serializer = EvolutionSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    
+    def update(self, request, pk):
+        serializer = EvolutionSerializers(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        queryset = Evolution.objects.filter(pk=pk).update(**serializer.validated_data)
+        response_serializer = EvolutionSerializers(queryset)
+        
+        return Response(response_serializer.data, status=status.HTTP_200_OK)
+
+
+    def list_all(self, request):
+        queryset = Evolution.objects.all()
+        serializer = EvolutionSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def retrieve(self, request, pk):
+        queryset = Evolution.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EvolutionSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def retrieve_by_patient(self, request, pk):
+        queryset = Evolution.objects.filter(patientId=pk)
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EvolutionSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def delete(self, request, pk):
+        queryset = Evolution.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        queryset.delete()
+        serializer = EvolutionSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class DietView(ModelViewSet):
+    
+    serializer_class = DietSerializers
+    queryset = Diet.objects.all()
+
+
+    def create(self, request):
+        serializer = DietSerializers(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = Diet.objects.create(**serializer.validated_data)
+        serializer = DietSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def list_all(self, request):
+        queryset = Diet.objects.all()
+        serializer = DietSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def retrieve(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        queryset = Diet.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = DietSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def retrieve_by_patient(self, request, pk):
+        queryset = Diet.objects.filter(patientId=pk)
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = DietSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def delete(self, request, pk):
+        queryset = Diet.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        queryset.delete()
+        serializer = DietSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class TrainingView(ModelViewSet):
+    
+    serializer_class = TrainingSerializers
+    queryset = Training.objects.all()
+
+
+    def create(self, request):
+        serializer = TrainingSerializers(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = Training.objects.create(**serializer.validated_data)
+        serializer = TrainingSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def list_all(self, request):
+        queryset = Training.objects.all()
+        serializer = TrainingSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def retrieve(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        queryset = Training.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TrainingSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def retrieve_by_patient(self, request, pk):
+        queryset = Training.objects.filter(patientId=pk)
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TrainingSerializers(queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def delete(self, request, pk):
+        queryset = Training.objects.filter(pk=pk).first()
+
+        if not queryset:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        queryset.delete()
+        serializer = TrainingSerializers(queryset)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
