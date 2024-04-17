@@ -4,7 +4,7 @@ DRY_RUN=$1
 
 echo "cd backend..."
 # Skip actual git pull in dry run
-[ "$DRY_RUN" != "true" ] && cd backend
+[ "$DRY_RUN" != "true" ] && cd backend/project_personal
 
 echo "Installing pipenv..."
 # Skip actual installation in dry run
