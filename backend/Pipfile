@@ -14,6 +14,7 @@ djangorestframework = "*"
 sqlparse = "*"
 typing_extensions = "*"
 tzdata = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
